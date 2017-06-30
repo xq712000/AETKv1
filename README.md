@@ -5,10 +5,13 @@
 
 
 # SUMMARY
+This is the code of this paper: [**Implementation of density-based solver for all speeds in the framework of OpenFOAM**](http://www.sciencedirect.com/science/article/pii/S0010465514002136)
 
-debug or run based on OpenFOAM-2.0.1.
+The original version downloaded from [HERE](http://cpc.cs.qub.ac.uk/summaries/AETK_v1_0.html) can be debug or run based on OpenFOAM-2.0.1.
 
-modified to markdown format by Di Cheng.
+This README.md was modified from original README.txt to markdown format by Di Cheng.
+
+My intention to to try to transplant it to OpenFOAM 4.1
 
 ---
 
