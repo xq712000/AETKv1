@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.7.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+//libs            ("libcompressibleTurbulenceModel.so" "libcompressibleRASModels.so");
+libs 		( "libDensityBasedSolvers.so" );
+
+application     allSpeedUnsteadyFoam;
+
+startFrom       latestTime;
+
+startTime       0.0;
+
+stopAt          endTime;
+
+endTime         100;
+
+
+deltaT          1e-3;
+
+writeControl    runTime;//runTime;//timeStep;//adjustableRunTime;//
+
+writeInterval    1;//0.5;//1e0;//0.0001;//0.0001;//10;//0.1e-7;//
+
+purgeWrite      0;
+
+writeFormat     ascii;//binary;
+
+writePrecision  12;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   12;
+
+runTimeModifiable yes;
+
+
+// ************************************************************************* //
+// Switch for global time stepping, with global minimum localTS
+adjustTimeStep  no;//yes;//
+
+// maximimun CFL number for localTS
+maxCo           0.1;//1000;//
+
+// maxDeltaT - currently not used in Density-Based solvers
+maxDeltaT       1;
+// fixed the local time stepping in the sub time loop.
+//deltaT_Local	deltaT_Local [ 0 0 1 0 0 0 0 ] 1e-4;//20e-6;//0.2e-7; 
+//deltaT_Local	1e-4;
+
+//velocity_Inlet	velocity_Inlet [ 0 1 -1 0 0 0 0 ] 211.73;//10;//1;
+velocity_Inlet	 211.73;
+
+
+

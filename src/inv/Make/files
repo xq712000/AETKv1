@@ -1,0 +1,5 @@
+1RINV.C
+
+
+LIB = $(FOAM_USER_LIBBIN)/libInv
+/*EXE = $(FOAM_USER_APPBIN)/rinv*/

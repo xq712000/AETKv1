@@ -1,0 +1,108 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    rho
+    {
+        solver          diagonal;
+    };
+
+    rhoU
+    {
+        solver          diagonal;
+    };
+
+    rhoE
+    {
+        solver          diagonal;
+    };
+    k
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0;
+    };
+
+    omega
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-08;
+        relTol          0;
+    };
+
+    p
+    {
+        solver          diagonal;
+    };
+
+    U
+    {
+        solver          diagonal;
+    };
+
+    T
+    {
+        solver          diagonal;
+    };
+
+    h
+    {
+        solver          diagonal;
+    };
+
+}
+
+multiStage
+{
+//    numberSubCycles 250000;//200000;//10;//10000;//50000;//
+    numberSubCycles 10;//10000;//50000;//
+    numberRungeKuttaStages 4;
+    RKCoeff 0.11 0.2766 0.5 1.0;
+//    numberRungeKuttaStages 1;
+//    RKCoeff 1;//1.0;
+}
+
+Riemann
+{
+    secondOrder yes;//yes;            // activate 2nd order extensions
+    multidimLimiter no;        // Switch between 1D and mutliD limiters
+    epsilon "5";                // VK constant
+    limiterName vanLeerSlope; 	// vanAlbadaSlope,  vanLeerSlope, MinmodSlope
+	RiemannSolverKonstant	0.00055;//0.0022;
+}
+
+relaxationFactors
+{
+    // Note: under-relaxation factors used in wave-transmissive schemes
+    k             0.2;
+    omega         0.2;
+}
+
+fieldBounds
+{
+    // With bounding
+    p      1e-6     1e8;
+    rho    1e-6     1e8;
+    h      0		1e8;//1e-6     1e8;   //241500
+    e      1e-6     1e8;   //172189.5
+    rhoE   1e-6     1e8;   //1360.29705
+    T      1e-6    5000;   //241.5
+    U    5000;
+}
+// ************************************************************************* //

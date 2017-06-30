@@ -1,0 +1,96 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM Extend Project: Open Source CFD        |
+|  \\    /   O peration     | Version:  1.6-ext                               |
+|   \\  /    A nd           | Web:      www.extend-project.de                 |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default none;
+    ddt(rho)       EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+    ddt(rhoU)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+    ddt(rhoE)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+	ddt(p)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+	ddt(U)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+	ddt(T)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+	ddt(h)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(rho)       Gauss linear;//fourth;//cellLimited Gauss linear 1.0;// Gauss linear;//leastSquares;//
+    grad(USlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;//
+    grad(pSlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;//
+	grad(p)			Gauss linear;//fourth;//cellLimited Gauss linear 1.0;//Gauss linear;//leastSquares;//
+    grad(U)         Gauss linear;//fourth;//cellLimited Gauss linear 1.0;//Gauss linear;//leastSquares;//cellMDLimited Gauss linear 1.0;
+    grad(TSlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;// 
+    snGradCorr(U)   Gauss linear;
+    snGradCorr(h)   Gauss linear;
+    snGradCorr(k)   Gauss linear;
+}
+
+
+//gradSchemes
+//{
+//    default         cellMDLimited Gauss linear 1.0;//leastSquares;
+//    grad(rho)       Gauss linear;//cellMDLimited Gauss linear 1.0;//
+//    grad(USlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;
+//    grad(pSlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;//
+//    grad(U)         Gauss linear;//cellMDLimited Gauss linear 1.0;
+//    grad(TSlope)    Gauss linear;//cellMDLimited Gauss linear 1.0;// 
+//    snGradCorr(U)   Gauss linear;
+//    snGradCorr(h)   Gauss linear;
+//    snGradCorr(k)   Gauss linear;
+//}
+
+divSchemes
+{
+    default         none;
+    div(tau)     Gauss linear;
+    div((tau&U)) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         none;
+    laplacian(alphaEff,h) Gauss linear corrected;
+    laplacian((mu+(0.6*mut)),k) Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default               none;
+
+    reconstruct(rho) vanLeer;//QUICK;//SuperBee;//limitedCubic 1; //linearUpwind  linear;//cubicUpwindFit 1;//cubic;//Minmod;//
+    reconstruct(U)   vanLeerV;//QUICKV;//SuperBeeV;//limitedCubicV 1;//linearUpwindV  linear;//cubicUpwindFit 1;//cubic;//MinmodV;//
+    reconstruct(p)   vanLeer;//QUICK;//SuperBee;//limitedCubic 1;//linearUpwind  linear;//cubicUpwindFit 1;//cubic;//Minmod;//
+    reconstruct(k)   vanLeer;//QUICK;//SuperBee;//limitedCubic 1;//linearUpwind  linear;//cubicUpwindFit 1;//cubic;//Minmod;//
+
+//	interpolate(p) cubic;
+//	interpolate(U) cubic;
+//	interpolate(rho) cubic;
+
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+fluxRequired
+{
+    default         no;
+}
+
+// ************************************************************************* //
