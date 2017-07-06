@@ -56,10 +56,10 @@ Author
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
-#include "basicPsiThermo.H"
-#include "turbulenceModel.H"
-
-#include "MRFZones.H"
+#include "psiThermo.H"
+#include "turbulentFluidThermoModel.H"
+//#include "MRFZone.H"
+#include "localEulerDdtScheme.H"
 #include "dynamicFvMesh.H"
 #include "godunovFlux.H"
 
