@@ -220,17 +220,18 @@
 
 // Refer to section 2.3.1., discrete form of source term of, eqn. (4). 
 ////////////////////////////////////////////////		
-		rhoFlux2.internalField()=taoinv11*rhoFlux.internalField()+taoinv12*rhoUFlux_x.internalField()+taoinv13*rhoUFlux_y.internalField()+taoinv14*rhoUFlux_z.internalField()+taoinv15*rhoEFlux.internalField();
+		rhoFlux2.primitiveFieldRef()=taoinv11*rhoFlux.primitiveField()+taoinv12*rhoUFlux_x.primitiveField()+taoinv13*rhoUFlux_y.primitiveField()+taoinv14*rhoUFlux_z.primitiveField()+taoinv15*rhoEFlux.primitiveField();
+		//rhoFlux2.internalField()=taoinv11*rhoFlux.internalField()+taoinv12*rhoUFlux_x.internalField()+taoinv13*rhoUFlux_y.internalField()+taoinv14*rhoUFlux_z.internalField()+taoinv15*rhoEFlux.internalField();
 
 		forAll(rhoUFlux2.internalField(),cellI)
 		{
 
-			rhoUFlux2.internalField()[cellI].x()=taoinv21[cellI]*rhoFlux.internalField()[cellI]+taoinv22[cellI]*rhoUFlux.internalField()[cellI].x();
-			rhoUFlux2.internalField()[cellI].y()=taoinv31[cellI]*rhoFlux.internalField()[cellI]+taoinv33[cellI]*rhoUFlux.internalField()[cellI].y();
-			rhoUFlux2.internalField()[cellI].z()=taoinv41[cellI]*rhoFlux.internalField()[cellI]+taoinv44[cellI]*rhoUFlux.internalField()[cellI].z();
+			rhoUFlux2.primitiveFieldRef()[cellI].x()=taoinv21[cellI]*rhoFlux.primitiveField()[cellI]+taoinv22[cellI]*rhoUFlux.primitiveField()[cellI].x();
+			rhoUFlux2.primitiveFieldRef()[cellI].y()=taoinv31[cellI]*rhoFlux.primitiveField()[cellI]+taoinv33[cellI]*rhoUFlux.primitiveField()[cellI].y();
+			rhoUFlux2.primitiveFieldRef()[cellI].z()=taoinv41[cellI]*rhoFlux.primitiveField()[cellI]+taoinv44[cellI]*rhoUFlux.primitiveField()[cellI].z();
 		}	
 
-		rhoEFlux2.internalField()=taoinv51*rhoFlux.internalField()+taoinv52*rhoUFlux_x.internalField()+taoinv53*rhoUFlux_y.internalField()+taoinv54*rhoUFlux_z.internalField()+taoinv55*rhoEFlux.internalField();
+		rhoEFlux2.primitiveFieldRef()=taoinv51*rhoFlux.primitiveField()+taoinv52*rhoUFlux_x.primitiveField()+taoinv53*rhoUFlux_y.primitiveField()+taoinv54*rhoUFlux_z.primitiveField()+taoinv55*rhoEFlux.primitiveField();
 
 
 		volScalarField Cp_rhoEFlux2=thermo.Cp()*rhoEFlux2;
@@ -335,19 +336,19 @@
 
                 // Update boundary field of rho
 				rho=thermo.rho();
-                rho.boundaryField() = thermo.rho()().boundaryField();
+                rho.boundaryFieldRef() = thermo.rho()().boundaryField();
 
                 // Update boundary field of rhoU
 // add 2013.7.3
 				rhoU = rho*U;
 
-                rhoU.boundaryField() = rho.boundaryField()*U.boundaryField();
+                rhoU.boundaryFieldRef() = rho.boundaryField()*U.boundaryField();
 
                 // Update boundary field of rhoE
 
 // add 2013.7.3
 				rhoE = rho*(h + 0.5*magSqr(U) + turbulence->k()) - p;
-                rhoE.boundaryField() =
+                rhoE.boundaryFieldRef() =
                     rho.boundaryField()*
                     (
                         0.5*magSqr(U.boundaryField())
@@ -364,7 +365,7 @@
 
                 // Convergence check
                 // Averaged L2-Norm of fluxes
-                scalar L2NormRho = max(Foam::sqrt(sum(sqr(rhoFlux.internalField()))
+                scalar L2NormRho = Foam::max(Foam::sqrt(sum(sqr(rhoFlux.primitiveField()))
                     /mesh.nCells()),SMALL);
 //                scalar LInfNormRho = max(mag(rhoFlux.internalField()));
 //                 scalar L2NormRhoU = max(Foam::sqrt(sum(magSqr(rhoUFlux.internalField()))

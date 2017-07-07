@@ -995,9 +995,10 @@ void Foam::godunovFlux<Flux>::update(Switch secondOrder)
     // Update boundary field and values
     forAll(p_.boundaryField(), patchi)
     {
-        fvsPatchScalarField& pRhoFlux = rhoFlux_.boundaryField()[patchi];
-        fvsPatchVectorField& pRhoUFlux = rhoUFlux_.boundaryField()[patchi];
-        fvsPatchScalarField& pRhoEFlux = rhoEFlux_.boundaryField()[patchi];
+        //fvsPatchScalarField& pRhoFlux = rhoFlux_.boundaryField()[patchi];
+        auto pRhoFlux = rhoFlux_.boundaryFieldRef()[patchi];
+        auto& pRhoUFlux = rhoUFlux_.boundaryFieldRef()[patchi];
+        auto& pRhoEFlux = rhoEFlux_.boundaryFieldRef()[patchi];
 
         const fvPatchScalarField& pp = p_.boundaryField()[patchi];
         const fvPatchVectorField& pU = U_.boundaryField()[patchi];

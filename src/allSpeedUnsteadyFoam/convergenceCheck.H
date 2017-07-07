@@ -3,7 +3,7 @@
 //                volVectorField rhoUFlux = -fvc::div(Godunov.rhoUFlux())
 //                    + fvc::div(tau);
 
-                scalar L2NormRho = max(Foam::sqrt(sum(sqr(rhoFlux.internalField()))
+                scalar L2NormRho = max(Foam::sqrt(sum(sqr(rhoFlux.primitiveField()))
                     /mesh.nCells()),SMALL);
 //                scalar LInfNormRho = max(mag(rhoFlux.internalField()));
 
