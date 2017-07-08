@@ -150,6 +150,19 @@ public:
 
         typedef typename ddtScheme<Type>::fluxFieldType fluxFieldType;
 
+        tmp<fluxFieldType> fvcDdtUfCorr
+        (
+          const GeometricField<Type, fvPatchField, volMesh>& U,
+          const GeometricField<Type, fvsPatchField, surfaceMesh>& Uf
+        );
+
+        tmp<fluxFieldType> fvcDdtUfCorr
+        (
+          const volScalarField& rho,
+          const GeometricField<Type, fvPatchField, volMesh>& U,
+          const GeometricField<Type, fvsPatchField, surfaceMesh>& Uf
+        );
+
         tmp<fluxFieldType> fvcDdtPhiCorr
         (
             const volScalarField& rA,
@@ -190,7 +203,19 @@ tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtPhiCorr
     const surfaceScalarField& phi
 );
 
-
+template<>
+tmp<surfaceScalarField> localEulerDdtScheme<scalar>::fvcDdtUfCorr
+(
+    const GeometricField<scalar, fvPatchField, volMesh>& U,
+    const GeometricField<scalar, fvsPatchField, surfaceMesh>& Uf
+);
+template<>
+tmp<surfaceScalarField> localEulerDdtScheme<scalar>::fvcDdtUfCorr
+(
+    const volScalarField& rho,
+    const volScalarField& U,
+    const surfaceScalarField& Uf
+);
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 } // End namespace fv

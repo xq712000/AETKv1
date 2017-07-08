@@ -16,8 +16,10 @@ FoamFile
 
 ddtSchemes
 {
-    default none;
+    default localEuler;
+    //default none;
 
+/*
     ddt(rho)       EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
     ddt(rhoU)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
     ddt(rhoE)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
@@ -25,7 +27,6 @@ ddtSchemes
 	ddt(U)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
 	ddt(T)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
 	ddt(h)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
-/*
     ddt(rho)       Euler;
     ddt(rhoU)      Euler;
     ddt(rhoE)      Euler;
@@ -75,7 +76,9 @@ laplacianSchemes
 {
     default         none;
     laplacian(alphaEff,h) Gauss linear corrected;
-    laplacian((mu+(0.6*mut)),k) Gauss linear corrected;
+    //laplacian((mu+(0.6*mut)),k) Gauss linear corrected;
+    laplacian((thermo:mu+(0.6*(rho*nut))),k) Gauss linear corrected;
+  laplacian(thermo:alpha,h) Gauss linear corrected;
 }
 
 interpolationSchemes

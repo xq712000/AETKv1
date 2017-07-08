@@ -1,5 +1,6 @@
 isentropicTotalTemperature/isentropicTotalTemperatureFvPatchScalarField.C
 temperatureDirectedInletOutletVelocity/temperatureDirectedInletOutletVelocityFvPatchVectorField.C
 temperatureDirectedInletVelocity/temperatureDirectedInletVelocityFvPatchVectorField.C
+EulerLocalDdtScheme/EulerLocalDdtSchemes.C
 
 LIB = $(FOAM_USER_LIBBIN)/libDensityBasedSolvers

@@ -29,7 +29,7 @@ Author
     Oliver Borm  All rights reserved.
 
 \*---------------------------------------------------------------------------*/
-
+//#pragma once
 #include "EulerLocalDdtScheme.H"
 #include "surfaceInterpolate.H"
 #include "fvcDiv.H"
