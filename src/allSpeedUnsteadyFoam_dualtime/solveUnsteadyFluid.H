@@ -528,11 +528,11 @@
 
 // // Refer to section 2.3.4., discrete form of source term of eqn. (20).
 ////////////////////////////////////////////////
-		rhoFlux2.internalField()=rhoFlux.internalField()-(3*rho.oldTime().internalField()-4*rhoOld.internalField()+rhoOldOld.internalField())/2/physDeltaT[1];
+		rhoFlux2.primitiveFieldRef()=rhoFlux.primitiveField()-(3*rho.oldTime().primitiveField()-4*rhoOld.primitiveField()+rhoOldOld.primitiveField())/2/physDeltaT[1];
 
-		rhoUFlux2.internalField()=rhoUFlux.internalField()-(3*rhoU.oldTime().internalField()-4*rhoUOld.internalField()+rhoUOldOld.internalField())/2/physDeltaT[1];
+		rhoUFlux2.primitiveFieldRef()=rhoUFlux.primitiveField()-(3*rhoU.oldTime().primitiveField()-4*rhoUOld.primitiveField()+rhoUOldOld.primitiveField())/2/physDeltaT[1];
 	
-		rhoEFlux2.internalField()=rhoEFlux.internalField()-(3*rhoE.oldTime().internalField()-4*rhoEOld.internalField()+rhoEOldOld.internalField())/2/physDeltaT[1];	
+		rhoEFlux2.primitiveFieldRef()=rhoEFlux.primitiveField()-(3*rhoE.oldTime().primitiveField()-4*rhoEOld.primitiveField()+rhoEOldOld.primitiveField())/2/physDeltaT[1];	
 ////////////////////////////////////////////////
 
 // add 2013.7.4
@@ -543,21 +543,21 @@
 // // Refer to section 2.3.4., final discrete form of source term of eqn. (20) of which is multiplied by the inverse matrix of (tao+3*(pseudo time)/2(physical time)*P).
 
 ////////////////////////////////////////////////
-		rhoFlux3.internalField()=Ainv11*rhoFlux2.internalField()+Ainv12*rhoUFlux2_x.internalField()+Ainv13*rhoUFlux2_y.internalField()+Ainv14*rhoUFlux2_z.internalField()+Ainv15*rhoEFlux2.internalField();
+		rhoFlux3.primitiveFieldRef()=Ainv11*rhoFlux2.primitiveField()+Ainv12*rhoUFlux2_x.primitiveField()+Ainv13*rhoUFlux2_y.primitiveField()+Ainv14*rhoUFlux2_z.primitiveField()+Ainv15*rhoEFlux2.primitiveField();
 
-		forAll(rhoUFlux3.internalField(),cellI)
+		forAll(rhoUFlux3.primitiveField(),cellI)
 		{
 
-			rhoUFlux3.internalField()[cellI].x()=Ainv21[cellI]*rhoFlux2.internalField()[cellI]+Ainv22[cellI]*rhoUFlux2.internalField()[cellI].x()+Ainv23[cellI]*rhoUFlux2.internalField()[cellI].y()+Ainv24[cellI]*rhoUFlux2.internalField()[cellI].z()+Ainv25[cellI]*rhoEFlux2.internalField()[cellI];
+			rhoUFlux3.primitiveFieldRef()[cellI].x()=Ainv21[cellI]*rhoFlux2.primitiveField()[cellI]+Ainv22[cellI]*rhoUFlux2.primitiveField()[cellI].x()+Ainv23[cellI]*rhoUFlux2.primitiveField()[cellI].y()+Ainv24[cellI]*rhoUFlux2.primitiveField()[cellI].z()+Ainv25[cellI]*rhoEFlux2.primitiveField()[cellI];
 
-			rhoUFlux3.internalField()[cellI].y()=Ainv31[cellI]*rhoFlux2.internalField()[cellI]+Ainv32[cellI]*rhoUFlux2.internalField()[cellI].x()+Ainv33[cellI]*rhoUFlux2.internalField()[cellI].y()+Ainv34[cellI]*rhoUFlux2.internalField()[cellI].z()+Ainv35[cellI]*rhoEFlux2.internalField()[cellI];
+			rhoUFlux3.primitiveFieldRef()[cellI].y()=Ainv31[cellI]*rhoFlux2.primitiveField()[cellI]+Ainv32[cellI]*rhoUFlux2.primitiveField()[cellI].x()+Ainv33[cellI]*rhoUFlux2.primitiveField()[cellI].y()+Ainv34[cellI]*rhoUFlux2.primitiveField()[cellI].z()+Ainv35[cellI]*rhoEFlux2.primitiveField()[cellI];
 
-			rhoUFlux3.internalField()[cellI].z()=Ainv41[cellI]*rhoFlux2.internalField()[cellI]+Ainv42[cellI]*rhoUFlux2.internalField()[cellI].x()+Ainv43[cellI]*rhoUFlux2.internalField()[cellI].y()+Ainv44[cellI]*rhoUFlux2.internalField()[cellI].z()+Ainv45[cellI]*rhoEFlux2.internalField()[cellI];
+			rhoUFlux3.primitiveFieldRef()[cellI].z()=Ainv41[cellI]*rhoFlux2.primitiveField()[cellI]+Ainv42[cellI]*rhoUFlux2.primitiveField()[cellI].x()+Ainv43[cellI]*rhoUFlux2.primitiveField()[cellI].y()+Ainv44[cellI]*rhoUFlux2.primitiveField()[cellI].z()+Ainv45[cellI]*rhoEFlux2.primitiveField()[cellI];
 
 
 		}	
 
-		rhoEFlux3.internalField()=Ainv51*rhoFlux2.internalField()+Ainv52*rhoUFlux2_x.internalField()+Ainv53*rhoUFlux2_y.internalField()+Ainv54*rhoUFlux2_z.internalField()+Ainv55*rhoEFlux2.internalField();
+		rhoEFlux3.primitiveFieldRef()=Ainv51*rhoFlux2.primitiveField()+Ainv52*rhoUFlux2_x.primitiveField()+Ainv53*rhoUFlux2_y.primitiveField()+Ainv54*rhoUFlux2_z.primitiveField()+Ainv55*rhoEFlux2.primitiveField();
 
 
 		volScalarField Cp_rhoEFlux3=thermo.Cp()*rhoEFlux3;
@@ -666,19 +666,19 @@
 
                 // Update boundary field of rho
 				rho=thermo.rho();
-                rho.boundaryField() = thermo.rho()().boundaryField();
+                rho.boundaryFieldRef() = thermo.rho()().boundaryField();
 
                 // Update boundary field of rhoU
 // add 2013.7.3
 				rhoU = rho*U;
 
-                rhoU.boundaryField() = rho.boundaryField()*U.boundaryField();
+                rhoU.boundaryFieldRef() = rho.boundaryField()*U.boundaryField();
 
                 // Update boundary field of rhoE
 
 // add 2013.7.3
 				rhoE = rho*(h + 0.5*magSqr(U) + turbulence->k()) - p;
-                rhoE.boundaryField() =
+                rhoE.boundaryFieldRef() =
                     rho.boundaryField()*
                     (
                         0.5*magSqr(U.boundaryField())
@@ -696,7 +696,7 @@
                 // Convergence check
                 // Averaged L2-Norm of fluxes
 //                scalar L2NormRho = max(Foam::sqrt(sum(sqr(rhoFlux.internalField()))
-                scalar L2NormRho = max(Foam::sqrt(gSum(sqr(rhoFlux.internalField()))
+                scalar L2NormRho = max(Foam::sqrt(gSum(sqr(rhoFlux.primitiveField()))
                     /mesh.nCells()),SMALL);
 //                scalar LInfNormRho = max(mag(rhoFlux.internalField()));
 //                 scalar L2NormRhoU = max(Foam::sqrt(sum(magSqr(rhoUFlux.internalField()))
@@ -733,14 +733,14 @@
 //		if(Foam::log10(L2NormRho) <=0.0 || res_T <0.0001)
 
 // time average residual 
-		res1=gMax(mag(T.internalField()-T_old.internalField()));
+		res1=gMax(mag(T.primitiveField()-T_old.primitiveField()));
 		TMean=(TMean*(flag1-1)+T)/flag1;
 
-		res2=gMax(mag(TMean.internalField()-TMean_old.internalField()));
+		res2=gMax(mag(TMean.primitiveField()-TMean_old.primitiveField()));
 
 		if((runTime.timeIndex()%50)==1)
 		{
-			res3=gMax(mag(TMean.internalField()-TMean_old2.internalField()));	
+			res3=gMax(mag(TMean.primitiveField()-TMean_old2.primitiveField()));	
 		}
 
 

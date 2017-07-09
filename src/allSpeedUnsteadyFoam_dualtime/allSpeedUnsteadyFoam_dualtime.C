@@ -60,10 +60,11 @@ Author
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
-#include "basicPsiThermo.H"
-#include "turbulenceModel.H"
+#include "psiThermo.H"
+#include "turbulentFluidThermoModel.H"
 
-#include "MRFZones.H"
+
+//#include "MRFZones.H"
 #include "dynamicFvMesh.H"
 #include "godunovFlux.H"
 
@@ -82,9 +83,13 @@ int main(int argc, char *argv[])
 #   include "createTime.H"
 #   include "createDynamicFvMesh.H"
 #   include "createFields.H"
+    #include "createTimeControls.H"
+
+#include "createMRF.H"
 
 
 	scalar residual=0;
+scalar velocity_Inlet = runTime.controlDict().lookupOrDefault<scalar>("velocity_Inlet", 3.0);
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 

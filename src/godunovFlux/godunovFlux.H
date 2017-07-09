@@ -58,7 +58,6 @@ SourceFiles
  #include "SlopeLimiter/BarthJespersenSlope/BarthJespersenSlope.H"
  #include "SlopeLimiter/MinmodSlope/MinmodSlope.H"
  #include "SlopeLimiter/vanAlbadaSlope/vanAlbadaSlope.H"
- #include "SlopeLimiter/vanLeerSlope/vanLeerSlope.H"
 
  #include "NVDTVD.H"
  #include "NVDVTVDV.H"
