@@ -130,6 +130,18 @@ public:
             const volScalarField&,
             const GeometricField<Type, fvPatchField, volMesh>&
         );
+tmp<GeometricField<Type, fvPatchField, volMesh>> fvcDdt
+  (
+  const volScalarField& alpha,
+  const volScalarField& rho,
+  const GeometricField<Type, fvPatchField, volMesh>& psi
+);
+tmp<fvMatrix<Type>> fvmDdt
+  (
+  const volScalarField& alpha,
+  const volScalarField& rho,
+  const GeometricField<Type, fvPatchField, volMesh>& psi
+);
 
         tmp<fvMatrix<Type> > fvmDdt
         (
@@ -165,14 +177,12 @@ public:
 
         tmp<fluxFieldType> fvcDdtPhiCorr
         (
-            const volScalarField& rA,
             const GeometricField<Type, fvPatchField, volMesh>& U,
             const fluxFieldType& phi
         );
 
         tmp<fluxFieldType> fvcDdtPhiCorr
         (
-            const volScalarField& rA,
             const volScalarField& rho,
             const GeometricField<Type, fvPatchField, volMesh>& U,
             const fluxFieldType& phi
@@ -188,7 +198,6 @@ public:
 template<>
 tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtPhiCorr
 (
-    const volScalarField& rA,
     const volScalarField& U,
     const surfaceScalarField& phi
 );
@@ -197,20 +206,19 @@ tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtPhiCorr
 template<>
 tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtPhiCorr
 (
-    const volScalarField& rA,
     const volScalarField& rho,
     const volScalarField& U,
     const surfaceScalarField& phi
 );
 
 template<>
-tmp<surfaceScalarField> localEulerDdtScheme<scalar>::fvcDdtUfCorr
+tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtUfCorr
 (
     const GeometricField<scalar, fvPatchField, volMesh>& U,
     const GeometricField<scalar, fvsPatchField, surfaceMesh>& Uf
 );
 template<>
-tmp<surfaceScalarField> localEulerDdtScheme<scalar>::fvcDdtUfCorr
+tmp<surfaceScalarField> EulerLocalDdtScheme<scalar>::fvcDdtUfCorr
 (
     const volScalarField& rho,
     const volScalarField& U,

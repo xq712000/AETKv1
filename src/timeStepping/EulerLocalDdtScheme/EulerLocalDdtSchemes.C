@@ -32,12 +32,6 @@ Author
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-namespace Foam
-{
-namespace fv
-{
     makeFvDdtScheme(EulerLocalDdtScheme)
-}
-}
 
 // ************************************************************************* //
