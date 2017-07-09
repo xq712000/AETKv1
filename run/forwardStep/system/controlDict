@@ -35,7 +35,7 @@ writeControl    runTime;//timeStep;//adjustableRunTime;//
 
 writeInterval    0.1;
 
-purgeWrite      0;
+purgeWrite      3;
 
 writeFormat     ascii;//binary;
 
