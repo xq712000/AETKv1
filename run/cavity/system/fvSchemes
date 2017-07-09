@@ -16,10 +16,8 @@ FoamFile
 
 ddtSchemes
 {
-    default localEuler;
-    //default none;
+    default none;
 
-/*
     ddt(rho)       EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
     ddt(rhoU)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
     ddt(rhoE)      EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
@@ -27,6 +25,7 @@ ddtSchemes
 	ddt(U)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
 	ddt(T)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
 	ddt(h)		   EulerLocal  physDeltaT CoDeltaT;//backwardDual physDeltaT CoDeltaT;//
+/*
     ddt(rho)       Euler;
     ddt(rhoU)      Euler;
     ddt(rhoE)      Euler;

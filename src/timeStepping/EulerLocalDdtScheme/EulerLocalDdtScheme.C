@@ -587,7 +587,10 @@ EulerLocalDdtScheme<Type>::fvcDdtPhiCorr
                 new fluxFieldType
                 (
                     ddtIOobject,
-                    this->fvcDdtPhiCoeff(rho.oldTime(), U.oldTime(), phi.oldTime())
+                    this->fvcDdtPhiCoeff
+		    (
+                        rho.oldTime()* U.oldTime(), phi.oldTime()
+                    )
                    *(
                         fvc::interpolate(rDeltaT)*phi.oldTime()
                       - (
@@ -668,7 +671,7 @@ EulerLocalDdtScheme<Type>::fvcDdtUfCorr
                 mesh()
             ),
             this->fvcDdtPhiCoeff(U.oldTime(), phiUf0, phiCorr)
-           *rDeltaT*phiCorr 
+           *fvc::interpolate(rDeltaT)*phiCorr 
         )
     );
 }
@@ -716,7 +719,7 @@ EulerLocalDdtScheme<Type>::fvcDdtUfCorr
                     mesh().time().timeName(),
                     mesh()
                 ),
-                this->fvcDdtPhiCoeff(rhoU0, phiUf0, phiCorr)*rDeltaT*phiCorr
+                this->fvcDdtPhiCoeff(rhoU0,phiUf0,phiCorr)*fvc::interpolate(rDeltaT)*phiCorr
             )
         );
     }
