@@ -1,4 +1,5 @@
 EXE_INC = \
+    -g \
     -I../godunovFlux \
     -I../inv/lnInclude \
     -I../timeStepping/localTimeStep/lnInclude \

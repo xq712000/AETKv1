@@ -91,17 +91,19 @@
         {
             const volScalarField& tmpField =
                 mesh.lookupObject<volScalarField>(scalarFieldNames[fieldi]);
+		Info<<"Creating "<<(scalarFieldNames[fieldi]+oldName)<<"field."<<endl;
 
             scalarFieldList.set
             (
                 fieldi,
-                new volScalarField
+		new volScalarField
                 (
                     scalarFieldNames[fieldi]+oldName,
                     tmpField
                 )
             );
 
+		Info<<"Creating "<<(scalarFieldNames[fieldi]+oldName+oldName)<<"field."<<endl;
             scalarFieldList.set
             (
                 fieldi+scalarFieldNames.size(),
@@ -124,6 +126,7 @@
         {
             const volVectorField& tmpField =
                 mesh.lookupObject<volVectorField>(vectorFieldNames[fieldi]);
+		Info<<"Creating "<<(vectorFieldNames[fieldi]+oldName)<<"field."<<endl;
 
             vectorFieldList.set
             (
@@ -134,6 +137,7 @@
                      tmpField
                 )
             );
+		Info<<"Creating "<<(vectorFieldNames[fieldi]+oldName+oldName)<<"field."<<endl;
 
             vectorFieldList.set
             (

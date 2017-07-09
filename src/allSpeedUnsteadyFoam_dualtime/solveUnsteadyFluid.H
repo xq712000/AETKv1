@@ -5,7 +5,7 @@
 //	scalar res;
 	scalar flag1;
 	flag1=0;
-
+/*
     const volScalarField& rhoOld =
         mesh.lookupObject<volScalarField>("rhoOld");
     const volScalarField& rhoOldOld =
@@ -20,22 +20,22 @@
         mesh.lookupObject<volScalarField>("rhoEOld");
     const volScalarField& rhoEOldOld =
         mesh.lookupObject<volScalarField>("rhoEOldOld");
-
+*/
 
 
 	volScalarField TMean=T;
 	volScalarField TMean_old=TMean;
 	volScalarField TMean_old2=TMean;
 	
-//	volScalarField& rhoOld = scalarFieldList[0];
-//	volScalarField& rhoOldOld = scalarFieldList[0+scalarFieldNames.size()];
+	volScalarField& rhoOld = scalarFieldList[0];
+	volScalarField& rhoOldOld = scalarFieldList[0+scalarFieldNames.size()];
 
-//     label rhoUOldFieldI = 0;
-//     volVectorField& rhoUOld    = vectorFieldList[rhoUOldFieldI];
-//     volVectorField& rhoUOldOld = vectorFieldList[rhoUOldFieldI+vectorFieldNames.size()];
+     label rhoUOldFieldI = 0;
+     volVectorField& rhoUOld    = vectorFieldList[rhoUOldFieldI];
+     volVectorField& rhoUOldOld = vectorFieldList[rhoUOldFieldI+vectorFieldNames.size()];
 
-//	volScalarField& rhoEOld = scalarFieldList[1];
-//	volScalarField& rhoEOldOld = scalarFieldList[1+scalarFieldNames.size()];
+	volScalarField& rhoEOld = scalarFieldList[1];
+	volScalarField& rhoEOldOld = scalarFieldList[1+scalarFieldNames.size()];
 
         // update the boundary absolute velocity
 //        mrfZones.correctBoundaryVelocity(U);

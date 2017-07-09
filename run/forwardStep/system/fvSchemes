@@ -66,6 +66,9 @@ laplacianSchemes
     default         none;
     laplacian(alphaEff,h) Gauss linear corrected;
     laplacian((mu+(0.6*mut)),k) Gauss linear corrected;
+ laplacian((thermo:mu+(0.6*(rho*nut))),k) Gauss linear corrected;
+  laplacian(thermo:alpha,h) Gauss linear corrected;
+
 }
 
 interpolationSchemes
